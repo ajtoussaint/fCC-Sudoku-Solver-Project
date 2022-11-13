@@ -241,7 +241,7 @@ suite('Functional Tests', () => {
       });
   });
   //Check a puzzle placement with invalid placement value: POST request to /api/check
-  test("", function(done){
+  test("Check a puzzle placement with invalid placement value", function(done){
     let thisPuzzle = puzzleStrings.puzzlesAndSolutions[2][0];
 
     chai.request(server)
