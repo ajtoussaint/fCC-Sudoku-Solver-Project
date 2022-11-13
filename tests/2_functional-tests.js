@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 //import example puzzles
 const puzzleStrings = require('../controllers/puzzle-strings.js');
 
-
+/*
 suite('Functional Tests', () => {
   //Solve a puzzle with valid puzzle string: POST request to /api/solve
   test("Solve a puzzle with a valid puzzle string - POST /api/solve", function(done){
@@ -259,3 +259,4 @@ suite('Functional Tests', () => {
       });
   });
 });
+*/
