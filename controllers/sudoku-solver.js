@@ -55,17 +55,10 @@ class SudokuSolver {
     column = column*1 - 1;
     row = row.toUpperCase().charCodeAt(0) - 65;
 
-    console.log("WORK 1:", workArr[column]);
-
-    console.log(row, column);
     //insert the value into its location
     workArr[column][row] = value;
-    //check for duplicates in workArr row
-
-    console.log("Work 2:", workArr[column]);
-
+    //check for duplicates in workArr col
     if(workArr[column].filter(i => i==value).length != 1){
-      console.log("INVALID:", workArr[column].filter(i => i==value))
       return {valid:false, conflict: ["column"]}
     }else{
       return {valid:true}
@@ -73,6 +66,34 @@ class SudokuSolver {
   }
 
   checkRegionPlacement(puzzleString, row, column, value) {
+    //organize regions into arrays
+    let workArr = [];
+    for(let k=0; k<3; k++){
+      for(let i=0; i<3; i++){
+        //i represents the "region number" 0-8
+        let regionArr = []
+        for(let j=0; j<3; j++){
+        //j represents the cells in the region going top to bottom left to right
+        regionArr.push(puzzleString[j+i*3+k*27]);
+        regionArr.push(puzzleString[j+9+i*3+k*27]);
+        regionArr.push(puzzleString[j+18+i*3+k*27]);
+        }
+        workArr.push(regionArr);
+      }
+    }
+    //translate the coordinates into region locations
+    column = column*1-1;
+    row = row.toUpperCase().charCodeAt(0) - 65;
+    let region = 3*Math.trunc(row/3) + Math.trunc(column/3);
+    let valueLocation = row%3 + 3*(column%3);
+    //insert the value
+    workArr[region][valueLocation] = value;
+    //check for duplicates in workArr region
+    if(workArr[region].filter(i => i==value).length != 1){
+      return {valid:false, conflict: ["region"]}
+    }else{
+      return {valid:true}
+    }
 
   }
 
