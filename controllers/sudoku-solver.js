@@ -1,8 +1,6 @@
 class SudokuSolver {
 
   validate(puzzleString) {
-    console.log("validating...");
-    console.log(puzzleString);
     if(puzzleString.length != 81){
       return {error: "Expected puzzle to be 81 characters long"}
     }else if(/[^\d\.]/.test(puzzleString)){
@@ -97,8 +95,70 @@ class SudokuSolver {
 
   }
 
-  solve(puzzleString) {
 
+
+
+
+
+
+
+
+
+
+  solve(puzzleString) {
+    let solver = new SudokuSolver;
+
+    //validate string and return the correct error
+    if(!(solver.validate(puzzleString).valid)){
+      return(solver.validate(puzzleString));
+    }else{
+      //if string is valid check that there is no case of wrongly placed numbers
+      let myArr = puzzleString.split("");
+      let arrRes = myArr.reduce( (output, value, index) => {
+        let row = String.fromCharCode(Math.trunc(index/9) + 65);
+        let column = index % 9 + 1;
+        if(value != "."){
+          if(! (solver.checkRowPlacement(puzzleString, row, column, value).valid && solver.checkColPlacement(puzzleString, row, column, value).valid && solver.checkRegionPlacement(puzzleString, row, column, value).valid) ){
+            console.log("Found an overlap concerning: ", value, " at ", row, column);
+            return false;
+          }else{
+            //console.log(value, " at ", row, column, " seems ok");
+            return (true);
+          }
+        }
+      }, true);
+      if(!arrRes){
+        //if there is a row/column/region violation already present return "unsolveable"
+        return {error: "unsolveable"}
+      }else{
+        //if the string has no blanks return it as a solution
+        if(puzzleString.indexOf(".")== -1){
+          console.log("Solution! : ", puzzleString);
+          return {solution: puzzleString}
+        }else{
+          //if the string has blanks
+          //make a new string with 1 in the blank (or next validateable number)
+          for(let i = 1; i<=9; i++){
+            //check that i is valid placement
+            let iIndex = puzzleString.indexOf(".");
+            let row = String.fromCharCode(Math.trunc(iIndex/9) + 65);
+            let column = iIndex % 9 + 1;
+            if ((solver.checkRowPlacement(puzzleString, row, column, i).valid && solver.checkColPlacement(puzzleString, row, column, i).valid && solver.checkRegionPlacement(puzzleString, row, column, i).valid)){
+              //if i can be placed there try to solve that string
+              let newStr = puzzleString.replace(".",i,1);
+              //if that string is solveable return it's solution
+              //if it is unsolveable try 2 etc...
+              let solverRes = solver.solve(newStr);
+              if(!solverRes.error){
+                return solverRes;
+              }
+            }
+          }
+          //if 1-9 all produce unsolveable strings declare the original string unsolveable
+          return {error: "unsolveable"}
+        }
+      }
+    }
   }
 }
 

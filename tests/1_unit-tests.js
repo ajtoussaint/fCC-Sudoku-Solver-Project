@@ -89,7 +89,7 @@ suite('Unit Tests', () => {
   test("valid puzzle strings pass the solver", function() {
     assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[4][0]),
-      {solution: puzzlesAndSolutions[4][1]},
+      {solution: puzzleStrings.puzzlesAndSolutions[4][1]},
       "valid puzzle string did not pass solver (string 4)"
     );
   });
@@ -98,7 +98,7 @@ suite('Unit Tests', () => {
   test("invalid puzzle strings fail the solver", function() {
     assert.deepEqual(
       solver.solve("."),
-      {error: "invalid puzzle string"},
+      {error: "Expected puzzle to be 81 characters long"},
       "solver returns solution for invalid puzzle"
     );
   });
@@ -107,25 +107,25 @@ suite('Unit Tests', () => {
   test("solver returns expected solution for an incomplete puzzle", function() {
     assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[1][0]),
-      {solution: puzzlesAndSolutions[1][1]},
+      {solution: puzzleStrings.puzzlesAndSolutions[1][1]},
       "valid puzzle string did not pass solver (string 1)"
     );
 
     assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[2][0]),
-      {solution: puzzlesAndSolutions[2][1]},
+      {solution: puzzleStrings.puzzlesAndSolutions[2][1]},
       "valid puzzle string did not pass solver (string 2)"
     );
 
     assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[3][0]),
-      {solution: puzzlesAndSolutions[3][1]},
+      {solution: puzzleStrings.puzzlesAndSolutions[3][1]},
       "valid puzzle string did not pass solver (string 3)"
     );
 
     assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[4][0]),
-      {solution: puzzlesAndSolutions[4][1]},
+      {solution: puzzleStrings.puzzlesAndSolutions[4][1]},
       "valid puzzle string did not pass solver (string 3)"
     );
 
