@@ -106,6 +106,12 @@ suite('Unit Tests', () => {
   //Solver returns the expected solution for an incomplete puzzle
   test("solver returns expected solution for an incomplete puzzle", function() {
     assert.deepEqual(
+      solver.solve(puzzleStrings.puzzlesAndSolutions[0][0]),
+      {solution: puzzleStrings.puzzlesAndSolutions[0][1]},
+      "valid puzzle string did not pass solver (string 1)"
+    );
+
+    assert.deepEqual(
       solver.solve(puzzleStrings.puzzlesAndSolutions[1][0]),
       {solution: puzzleStrings.puzzlesAndSolutions[1][1]},
       "valid puzzle string did not pass solver (string 1)"

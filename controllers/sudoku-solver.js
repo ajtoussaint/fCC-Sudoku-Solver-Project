@@ -120,16 +120,19 @@ class SudokuSolver {
         if(value != "."){
           if(! (solver.checkRowPlacement(puzzleString, row, column, value).valid && solver.checkColPlacement(puzzleString, row, column, value).valid && solver.checkRegionPlacement(puzzleString, row, column, value).valid) ){
             console.log("Found an overlap concerning: ", value, " at ", row, column);
-            return false;
+            return (output && false);
           }else{
-            //console.log(value, " at ", row, column, " seems ok");
-            return (true);
+            //console.log(value, " at ", row, column, " seems ok", output);
+            return (output && true);
           }
+        }else{
+          return (output && true);
         }
       }, true);
       if(!arrRes){
         //if there is a row/column/region violation already present return "unsolveable"
-        return {error: "unsolveable"}
+        console.log("fata contradiction:",!arrRes,  puzzleString);
+        return {error: 'Puzzle cannot be solved'}
       }else{
         //if the string has no blanks return it as a solution
         if(puzzleString.indexOf(".")== -1){
@@ -155,7 +158,8 @@ class SudokuSolver {
             }
           }
           //if 1-9 all produce unsolveable strings declare the original string unsolveable
-          return {error: "unsolveable"}
+          //console.log("tried everything to solve: ", puzzleString, " backing up a step");
+          return {error: 'Puzzle cannot be solved'}
         }
       }
     }

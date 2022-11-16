@@ -8,7 +8,6 @@ chai.use(chaiHttp);
 //import example puzzles
 const puzzleStrings = require('../controllers/puzzle-strings.js');
 
-/*
 suite('Functional Tests', () => {
   //Solve a puzzle with valid puzzle string: POST request to /api/solve
   test("Solve a puzzle with a valid puzzle string - POST /api/solve", function(done){
@@ -23,7 +22,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({solution: thisSolution}, "incorrect solution");
+        assert.deepEqual(res.body, {solution: thisSolution}, "incorrect solution");
         done();
       });
   });
@@ -36,7 +35,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Required field missing'}, "lack of puzzle should not be tolerated");
+        assert.deepEqual(res.body, {error: 'Required field missing'}, "lack of puzzle should not be tolerated");
         done();
       });
   });
@@ -49,7 +48,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Invalid characters in puzzle'}, "valid characters accepted");
+        assert.deepEqual(res.body, {error: 'Invalid characters in puzzle'}, "valid characters accepted");
         done();
       });
   });
@@ -62,7 +61,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Expected puzzle to be 81 characters long'}, "wrong length puzzle accepted");
+        assert.deepEqual(res.body, {error: 'Expected puzzle to be 81 characters long'}, "wrong length puzzle accepted");
         done();
       });
   });
@@ -74,7 +73,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Puzzle cannot be solved'}, "produced result for unsolveable puzzle");
+        assert.deepEqual(res.body, {error: 'Puzzle cannot be solved'}, "produced result for unsolveable puzzle");
         done();
       });
   });
@@ -86,8 +85,8 @@ suite('Functional Tests', () => {
       .post("/api/check")
       .send({
         puzzle:thisPuzzle,
-        coordinate:"A2",
-        value:6
+        coordinate:"I1",
+        value:3
       })
       .end( (err, res) => {
         assert.equal(res.status, 200, "bad status");
@@ -259,4 +258,3 @@ suite('Functional Tests', () => {
       });
   });
 });
-*/
