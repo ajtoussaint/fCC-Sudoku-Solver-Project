@@ -201,7 +201,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Invalid characters in puzzle'}, "valid characters accepted");
+        assert.deepEqual(res.body, {error: 'Invalid characters in puzzle'}, "valid characters accepted");
         done();
       });
   });
@@ -217,7 +217,7 @@ suite('Functional Tests', () => {
       .end( (err, res) => {
         assert.equal(res.status, 200);
         assert.isObject(res.body, "response is not an object");
-        assert.deepEqual({error: 'Expected puzzle to be 81 characters long'}, "wrong length puzzle accepted");
+        assert.deepEqual(res.body, {error: 'Expected puzzle to be 81 characters long'}, "wrong length puzzle accepted");
         done();
       });
   });
